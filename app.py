@@ -36,16 +36,21 @@ def predict():
 
 @app.route('/metrics')
 def metrics():
-    X = df.drop('Churn', axis=1)
-    y = df['Churn']
-    X = pd.get_dummies(X)
-    X = X.reindex(columns=model_columns, fill_value=0)
-    y_pred = model.predict(X)
-    
-    accuracy = accuracy_score(y, y_pred)
-    f1 = f1_score(y, y_pred, zero_division=0)
-    precision = precision_score(y, y_pred, zero_division=0)
-    recall = recall_score(y, y_pred, zero_division=0)
+    try:
+        X = df.drop('Churn', axis=1)
+        y = df['Churn']
+        X = pd.get_dummies(X)
+        X = X.reindex(columns=model_columns, fill_value=0)
+        y_pred = model.predict(X)
+        
+        accuracy = float(accuracy_score(y, y_pred))
+        f1 = float(f1_score(y, y_pred, zero_division=0))
+        precision = float(precision_score(y, y_pred, zero_division=0))
+        recall = float(recall_score(y, y_pred, zero_division=0))
+        
+    except Exception as e:
+        print("Error in metrics:", e)
+        accuracy, f1, precision, recall = 0.0, 0.0, 0.0, 0.0
     
     return render_template('metrics.html', 
                            accuracy=round(accuracy*100, 2),
