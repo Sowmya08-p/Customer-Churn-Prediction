@@ -40,13 +40,12 @@ def metrics():
     y = df['Churn']
     X = pd.get_dummies(X)
     X = X.reindex(columns=model_columns, fill_value=0)
-    
     y_pred = model.predict(X)
     
     accuracy = accuracy_score(y, y_pred)
-    f1 = f1_score(y, y_pred)
-    precision = precision_score(y, y_pred)
-    recall = recall_score(y, y_pred)
+    f1 = f1_score(y, y_pred, zero_division=0)
+    precision = precision_score(y, y_pred, zero_division=0)
+    recall = recall_score(y, y_pred, zero_division=0)
     
     return render_template('metrics.html', 
                            accuracy=round(accuracy*100, 2),
