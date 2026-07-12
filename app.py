@@ -22,7 +22,6 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    #... same as before...
     input_dict = request.form.to_dict()
     input_df = pd.DataFrame([input_dict])
     
@@ -35,32 +34,25 @@ def predict():
     result = 'YES - Will Churn' if prediction == 1 else 'NO - Will Not Churn'
     return render_template('index.html', prediction=result, prob=round(probability*100, 2))
 
-
 @app.route('/metrics')
 def metrics():
-    # 1. Prepare test data same way as training
     X = df.drop('Churn', axis=1)
     y = df['Churn']
     X = pd.get_dummies(X)
-    X = X.reindex(columns=model_columns, fill_value=0) # important!
+    X = X.reindex(columns=model_columns, fill_value=0)
     
-    # 2. Predict
     y_pred = model.predict(X)
     
-    # 3. Calculate metrics
     accuracy = accuracy_score(y, y_pred)
     f1 = f1_score(y, y_pred)
     precision = precision_score(y, y_pred)
     recall = recall_score(y, y_pred)
-    report = classification_report(y, y_pred, output_dict=True)
     
     return render_template('metrics.html', 
                            accuracy=round(accuracy*100, 2),
                            f1=round(f1, 4),
                            precision=round(precision, 4),
-                           recall=round(recall, 4),
-                           report=report)
-
+                           recall=round(recall, 4))
 
 if __name__ == '__main__':
     app.run(debug=True)
