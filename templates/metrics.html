@@ -3,26 +3,21 @@
 <head>
     <title>Model Metrics</title>
     <style>
-        body { font-family: Arial; background: #f4f4f9; padding: 20px; }
-       .container { background: white; padding: 30px; border-radius: 10px; width: 600px; margin: auto; }
-        h2 { text-align: center; color: #333; }
-       .metric { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; font-size: 18px; }
-       .metric span { font-weight: bold; color: #007bff; }
-        a { display: block; text-align: center; margin-top: 20px; }
+        body { font-family: Arial; padding: 40px; background: #f5f5f5; }
+        .card { background: white; padding: 30px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        .metric { font-size: 20px; margin: 15px 0; }
+        .value { color: #007bff; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>📊 Model Performance Metrics</h2>
-        <div class="metric">Accuracy: <span>{{ accuracy }} %</span></div>
-        <div class="metric">F1 Score: <span>{{ f1 }}</span></div>
-        <div class="metric">Precision: <span>{{ precision }}</span></div>
-        <div class="metric">Recall: <span>{{ recall }}</span></div>
-        
-        <h3 style="margin-top:30px;">Detailed Report</h3>
-        <pre>{{ report | tojson(indent=2) }}</pre>
-        
-        <a href="/">← Back to Predictor</a>
+    <div class="card">
+        <h1>📊 Model Performance Metrics</h1>
+        <div class="metric">Accuracy: <span class="value">{{ accuracy }} %</span></div>
+        <div class="metric">F1 Score: <span class="value">{{ f1 }}</span></div>
+        <div class="metric">Precision: <span class="value">{{ precision }}</span></div>
+        <div class="metric">Recall: <span class="value">{{ recall }}</span></div>
+        <br><a href="/">← Back to Predictor</a>
     </div>
 </body>
 </html>
