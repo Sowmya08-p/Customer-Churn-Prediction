@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Model Metrics</title>
+    <style>
+        body { font-family: Arial; background: #f4f4f9; padding: 20px; }
+       .container { background: white; padding: 30px; border-radius: 10px; width: 600px; margin: auto; }
+        h2 { text-align: center; color: #333; }
+       .metric { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; font-size: 18px; }
+       .metric span { font-weight: bold; color: #007bff; }
+        a { display: block; text-align: center; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📊 Model Performance Metrics</h2>
+        <div class="metric">Accuracy: <span>{{ accuracy }} %</span></div>
+        <div class="metric">F1 Score: <span>{{ f1 }}</span></div>
+        <div class="metric">Precision: <span>{{ precision }}</span></div>
+        <div class="metric">Recall: <span>{{ recall }}</span></div>
+        
+        <h3 style="margin-top:30px;">Detailed Report</h3>
+        <pre>{{ report | tojson(indent=2) }}</pre>
+        
+        <a href="/">← Back to Predictor</a>
+    </div>
+</body>
+</html>
